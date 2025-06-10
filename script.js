@@ -1,35 +1,15 @@
-﻿async function getRate(from = "USD", to = "EGP") {
-  const res = await fetch(`https://api.exchangerate.host/latest?base=USD%27`)
-  const data = await res.json();
-  return data.rates[to];
-}
 
-async function convert() {
-  const amount = document.getElementById("amount").value;
-  const from = document.getElementById("from").value;
-  const to = document.getElementById("to").value;
-  const result = document.getElementById("result");
-
-  if (!amount) {
-    result.textContent = "من فضلك أدخل مبلغ صحيح";
-    return;
-  }
-
-  try {
-    const rate = await getRate(from, to);
-    const converted = (amount * rate).toFixed(2);
-    result.textContent = `${amount} ${from} = ${converted} ${to}`;
-  } catch (e) {
-    result.textContent = "حدث خطأ في الاتصال";
-  }
-}
-
-(async () => {
-  const rateText = document.getElementById("rate");
-  try {
-    const rate = await getRate("USD", "EGP");
-    rateText.textContent = `💵 1 دولار = ${rate.toFixed(2)} جنيه مصري`;
-  } catch {
-    rateText.textContent = "تعذر تحميل السعر";
-  }
-})();
+fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.exchangerate.host/latest?base=USD'))
+  .then(response => {
+    if (!response.ok) throw new Error("Network response was not ok.");
+    return response.json();
+  })
+  .then(data => {
+    const parsedData = JSON.parse(data.contents);
+    const rate = parsedData.rates.EGP;
+    document.getElementById("price").textContent = `1 USD = ${rate.toFixed(2)} EGP`;
+  })
+  .catch(error => {
+    document.getElementById("price").textContent = "تعذر تحميل السعر";
+    console.error("حدث خطأ أثناء التحميل:", error);
+  });
