@@ -1,0 +1,23 @@
+﻿body {
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  background: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.converter {
+  margin-top: 20px;
+}
+input, select, button {
+  padding: 10px;
+  margin: 5px;
+  font-size: 16px;
+}
