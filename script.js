@@ -1,5 +1,5 @@
 ﻿async function getRate(from = "USD", to = "EGP") {
-  const res = await fetch(`https://api.exchangerate.host/latest?base=${from}&symbols=${to}`);
+  const res = await fetch(`https://api.allorigins.win/raw?url=https://api.exchangerate.host/latest?base=USD`)
   const data = await res.json();
   return data.rates[to];
 }
